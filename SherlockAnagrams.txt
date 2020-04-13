@@ -1,0 +1,24 @@
+def nCr(n,r):
+    f = math.factorial
+    return f(n) // f(r) // f(n-r)
+
+def get_all_substrings(input_string):
+  length = len(input_string)
+  return [input_string[i:j + 1] for i in range(length) for j in range(i,length)]
+
+# Complete the sherlockAndAnagrams function below.
+def sherlockAndAnagrams(s):
+    c=get_all_substrings(s)
+    d=[]
+    for i in c:
+        i=sorted(i)
+        i=''.join(i)
+        d.append(i)
+    d=(Counter(d))
+    for key, count in dropwhile(lambda key_count: key_count[1] >= 2,d.most_common()):
+        del d[key]
+    count=0
+    
+    for key, value in sorted(d.items(), key=lambda x:x):
+        count+=nCr(value,2)
+    return(count)

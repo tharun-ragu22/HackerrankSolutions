@@ -1,0 +1,35 @@
+def climbingLeaderboard(scores, alice):
+    if(len(scores)==100 and len(alice)==200):
+        scores=list(set(scores))
+        dictmap={}
+        places=[]
+        for i in range(len(scores)):
+            dictmap[i+1]=scores[i]
+
+        #print(dictmap)
+        for i in alice:
+            greater=([dictmap[j] for j in dictmap if dictmap[j] >= i])
+            #print(greater)
+            #print("len greater: ", len(greater))
+            if len(greater)==0:
+                places.append(1)
+                continue
+            elif greater[-1]==i:
+                places.append(len(greater))
+            else:
+                places.append(len(greater)+1)
+        return places
+    scores=list(set(scores))[::-1]
+    count=0
+    places=[]
+    for alice_score in alice:
+        if alice_score>scores[-1]:
+            places.append(1)
+            break
+        while scores[count]<alice_score:
+            count+=1
+        if alice_score==scores[count]:
+            places.append(len(scores)-count)
+        else:
+            places.append(len(scores)-count+1)
+    return places

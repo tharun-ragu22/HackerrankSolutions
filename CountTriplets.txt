@@ -1,0 +1,12 @@
+def countTriplets(arr, r):
+    #VARIABLES  
+    
+    #m1 collects all elements, m2 collects possible triplets
+    arr2 = defaultdict(int)
+    arr3 = defaultdict(int)
+    count = 0
+    for i in arr:
+        count += arr3[i]
+        arr3[i*r] += arr2[i]
+        arr2[i*r] += 1
+    return count

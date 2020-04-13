@@ -1,0 +1,29 @@
+def isSteady(maps):
+    for i in maps.values():
+        if i>n/4:
+            return False
+    return True
+# Complete the steadyGene function below.
+def steadyGene(gene):
+    n=len(gene)
+    maps=dict(Counter(gene))
+    if all(value == n//4 for value in maps.values()):
+        print('HI')
+        return 0
+
+    left=0
+    right=0
+    mini=sys.maxsize
+
+    while(right<n-1):
+        right+=1
+        rc=gene[right]
+        maps[rc]=maps[rc]-1
+        print(right)
+
+        while isSteady(maps):
+            mini=min(mini,right-left)
+            left+=1
+            lc=gene[left]
+            maps[lc]=maps[lc]+1
+    return mini

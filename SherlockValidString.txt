@@ -1,0 +1,19 @@
+def isValid(s):
+    cs=Counter(s)
+    cs=Counter(cs.values())
+    
+    if len(cs)>2:
+        print("hi")
+        return("NO")
+
+    elif len(cs)==2:
+        cs=cs.most_common()
+        print(cs)
+        if cs[1]==(1,1):
+            return("YES")
+        elif abs(cs[0][0]-cs[1][0])==1 and cs[1][1]==1:
+            return("YES")
+        else:
+            return("NO")
+    else:
+        return("YES")
